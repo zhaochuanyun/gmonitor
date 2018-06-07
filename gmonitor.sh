@@ -21,7 +21,7 @@ procname=${basename%.*}
 
 env=$2
 if [ ! $env ];then
-    env="prod"
+    env="dev"
 fi
 cmd="$basedir/$procname -env $env"
 printf "exec cmd: $cmd\n"
@@ -35,7 +35,7 @@ export PATH
 pid_cmd="ps -e -opid -ocommand|grep -v grep|grep -v $procname.sh|grep \"$cmd\"|awk '{print \$1}'"
 
 # start the server
-start(){
+start() {
     retval=0
     printf "Starting the server of $procname\n"
 
@@ -47,7 +47,7 @@ start(){
     fi
 
     chmod 666 $procname.log
-    nohup $cmd >>$procname.log 2>&1 &
+    nohup $cmd >> $procname.log 2>&1 &
     if [ ! "$?" -eq 0 ] ; then
         printf 'The server could not started\n'
         retval=1
@@ -64,7 +64,7 @@ start(){
 }
 
 # stop the server
-stop(){
+stop() {
     retval=0
     printf "Stopping the server of $procname\n"
 
@@ -95,7 +95,7 @@ stop(){
 
 
 # get status of the server
-status(){
+status() {
     retval=0
     printf "Get status of the server of $procname\n"
 
@@ -109,7 +109,7 @@ status(){
 }
 
 # check if alive
-check(){
+check() {
     retval=0
     status
     if [ $retval -eq 1 ];then

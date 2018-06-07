@@ -12,16 +12,15 @@ import (
 	"github.com/zhaochuanyun/gmonitor/comm"
 	"github.com/zhaochuanyun/gmonitor/conf"
 	"github.com/zhaochuanyun/gmonitor/svr"
-
 )
 
 func request(command string, service string) {
 	url := fmt.Sprintf("http://%s:%d", utils.LocalIp, conf.C.Port)
-	params := map[string]string{
+	params := map[string]string {
 		"command": command,
 		"service": service,
 	}
-	gpp := &utils.GPP{
+	gpp := &utils.GPP {
 		Uri:     url,
 		Timeout: time.Second * 8,
 		Params:  params,

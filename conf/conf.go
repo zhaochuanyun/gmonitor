@@ -11,11 +11,11 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"os/exec"
 
 	"github.com/simplejia/utils"
 
 	"github.com/zhaochuanyun/gmonitor/comm"
+	"os/exec"
 )
 
 type Conf struct {
@@ -44,7 +44,7 @@ func init() {
 	flag.StringVar(&Restart, comm.RESTART, "", "restart a svr")
 	flag.StringVar(&GraceRestart, comm.GRESTART, "", "grace restart a svr")
 	flag.StringVar(&Status, comm.STATUS, "", "status a svr")
-	flag.StringVar(&Env, "env", "prod", "set env")
+	flag.StringVar(&Env, "env", "dev", "set env")
 
 	var conf string
 	flag.StringVar(&conf, "conf", "", "set custom conf")
@@ -62,6 +62,7 @@ func init() {
 	path, _ := filepath.Abs(file)
 	dir := filepath.Dir(path)
 	fcontent, err := ioutil.ReadFile(filepath.Join(dir, "conf", "conf.json"))
+	//fcontent, err := ioutil.ReadFile(filepath.Join("/Users/mvpzhao/go/src/github.com/zhaochuanyun/gmonitor", "conf", "conf.json"))
 	if err != nil {
 		println("conf.json not found")
 		os.Exit(-1)

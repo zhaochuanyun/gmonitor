@@ -12,6 +12,44 @@ import (
 	"syscall"
 )
 
+func StartProc(cmd string, env string) (process *os.Process, err error) {
+	if process, err = GetProc(cmd); err != nil || process != nil {
+		return
+	}
+
+	dirname := ""
+	pos := strings.Index(cmd, " ")
+	if pos != -1 {
+		dirname = filepath.Dir(cmd[:pos])
+	} else {
+		dirname = filepath.Dir(cmd)
+	}
+
+	env = strings.Trim(env, ";")
+	if env == "" {
+		env = "true"
+	}
+	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", dirname, env, cmd)
+
+	err = exec.Command("sh", "-c", cmdStr).Run()
+	if err != nil {
+		return
+	}
+	process, err = GetProc(cmd)
+	if err != nil {
+		return
+	}
+	if process != nil {
+		return
+	}
+	content, err := ioutil.ReadFile(filepath.Join(dirname, "gmonitor.log"))
+	if err != nil {
+		return
+	}
+	err = errors.New(string(content))
+	return
+}
+
 func GetProc(cmd string) (process *os.Process, err error) {
 	output, err := exec.Command("ps", "-e", "-opid", "-oppid", "-ocommand").CombinedOutput()
 	if err != nil {
@@ -91,43 +129,5 @@ func CheckProc(process *os.Process) (ok bool) {
 	if err == nil {
 		ok = true
 	}
-	return
-}
-
-func StartProc(cmd string, env string) (process *os.Process, err error) {
-	if process, err = GetProc(cmd); err != nil || process != nil {
-		return
-	}
-
-	dirname := ""
-	pos := strings.Index(cmd, " ")
-	if pos != -1 {
-		dirname = filepath.Dir(cmd[:pos])
-	} else {
-		dirname = filepath.Dir(cmd)
-	}
-
-	env = strings.Trim(env, ";")
-	if env == "" {
-		env = "true"
-	}
-	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", dirname, env, cmd)
-
-	err = exec.Command("sh", "-c", cmdStr).Run()
-	if err != nil {
-		return
-	}
-	process, err = GetProc(cmd)
-	if err != nil {
-		return
-	}
-	if process != nil {
-		return
-	}
-	content, err := ioutil.ReadFile(filepath.Join(dirname, "gmonitor.log"))
-	if err != nil {
-		return
-	}
-	err = errors.New(string(content))
 	return
 }
