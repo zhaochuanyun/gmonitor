@@ -10,6 +10,8 @@ import (
 	"strconv"
 	"strings"
 	"syscall"
+
+	"github.com/simplejia/clog"
 )
 
 func StartProc(cmd string, env string) (process *os.Process, err error) {
@@ -30,6 +32,8 @@ func StartProc(cmd string, env string) (process *os.Process, err error) {
 		env = "true"
 	}
 	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", dirname, env, cmd)
+
+	clog.Info("exec.Command() start............ cmd: %s", cmdStr)
 
 	err = exec.Command("sh", "-c", cmdStr).Run()
 	if err != nil {

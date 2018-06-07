@@ -34,7 +34,7 @@ func proc(service string, cmd string) {
 		return
 	}
 
-	tick1 := time.Tick(time.Second * 300)
+	tick1 := time.Tick(time.Second * 10)
 	tick2 := time.Tick(time.Minute)
 	tick3 := time.Tick(time.Hour * 24)
 	failNum := 0
