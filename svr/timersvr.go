@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/zhaochuanyun/clog"
-	"github.com/zhaochuanyun/cmonitor/comm"
-	"github.com/zhaochuanyun/cmonitor/conf"
-	"github.com/zhaochuanyun/cmonitor/procs"
+	"github.com/zhaochuanyun/gmonitor/comm"
+	"github.com/zhaochuanyun/gmonitor/conf"
+	"github.com/zhaochuanyun/gmonitor/procs"
 )
 
 func proc(service string, cmd string) {
@@ -117,7 +117,7 @@ func proc(service string, cmd string) {
 				dirname = filepath.Dir(fullpath)
 			}
 			cmdStr := fmt.Sprintf(
-				"cd %s; head -c`wc -c cmonitor.log|awk '{print $1}'` cmonitor.log >cmonitor.%d.log && cat /dev/null >cmonitor.log",
+				"cd %s; head -c`wc -c gmonitor.log|awk '{print $1}'` gmonitor.log >gmonitor.%d.log && cat /dev/null >gmonitor.log",
 				dirname, time.Now().Day(),
 			)
 			err := exec.Command("sh", "-c", cmdStr).Run()

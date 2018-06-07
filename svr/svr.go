@@ -1,6 +1,6 @@
 package svr
 
-import "github.com/zhaochuanyun/cmonitor/conf"
+import "github.com/zhaochuanyun/gmonitor/conf"
 
 func StartSvr() {
 	for k, _ := range conf.C.Svrs {

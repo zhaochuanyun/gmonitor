@@ -111,7 +111,7 @@ func StartProc(cmd string, env string) (process *os.Process, err error) {
 	if env == "" {
 		env = "true"
 	}
-	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >>cmonitor.log 2>&1 &", dirname, env, cmd)
+	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", dirname, env, cmd)
 
 	err = exec.Command("sh", "-c", cmdStr).Run()
 	if err != nil {
@@ -124,7 +124,7 @@ func StartProc(cmd string, env string) (process *os.Process, err error) {
 	if process != nil {
 		return
 	}
-	content, err := ioutil.ReadFile(filepath.Join(dirname, "cmonitor.log"))
+	content, err := ioutil.ReadFile(filepath.Join(dirname, "gmonitor.log"))
 	if err != nil {
 		return
 	}

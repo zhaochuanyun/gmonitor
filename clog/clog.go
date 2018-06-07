@@ -2,7 +2,7 @@ package clog
 
 import (
 	"github.com/zhaochuanyun/clog"
-	"github.com/zhaochuanyun/cmonitor/conf"
+	"github.com/zhaochuanyun/gmonitor/conf"
 	"github.com/zhaochuanyun/namecli/api"
 )
 

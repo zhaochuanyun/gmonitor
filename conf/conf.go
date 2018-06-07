@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/zhaochuanyun/cmonitor/comm"
+	"github.com/zhaochuanyun/gmonitor/comm"
 	"github.com/zhaochuanyun/utils"
 	"os/exec"
 )

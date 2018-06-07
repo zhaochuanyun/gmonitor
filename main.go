@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simplejia/clog"
-	_ "github.com/simplejia/cmonitor/clog"
-	"github.com/simplejia/cmonitor/comm"
-	"github.com/simplejia/cmonitor/conf"
-	"github.com/simplejia/cmonitor/svr"
-	"github.com/simplejia/utils"
+	"github.com/zhaochuanyun/clog"
+	_ "github.com/zhaochuanyun/gmonitor/clog"
+	"github.com/zhaochuanyun/gmonitor/comm"
+	"github.com/zhaochuanyun/gmonitor/conf"
+	"github.com/zhaochuanyun/gmonitor/svr"
+	"github.com/zhaochuanyun/utils"
 )
 
 func request(command string, service string) {
@@ -26,7 +26,7 @@ func request(command string, service string) {
 	}
 	body, err := utils.Get(gpp)
 	if err != nil {
-		fmt.Printf("Error: [cmonitor maybe down!] %v, %s\n", err, body)
+		fmt.Printf("Error: [gmonitor maybe down!] %v, %s\n", err, body)
 		return
 	}
 

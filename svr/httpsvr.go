@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/zhaochuanyun/clog"
-	"github.com/zhaochuanyun/cmonitor/comm"
-	"github.com/zhaochuanyun/cmonitor/conf"
-	"github.com/zhaochuanyun/cmonitor/procs"
+	"github.com/zhaochuanyun/gmonitor/comm"
+	"github.com/zhaochuanyun/gmonitor/conf"
+	"github.com/zhaochuanyun/gmonitor/procs"
 	"github.com/zhaochuanyun/utils"
 )
 
