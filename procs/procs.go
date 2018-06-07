@@ -14,7 +14,7 @@ import (
 	"github.com/simplejia/clog"
 )
 
-func StartProc(cmd string, env string) (process *os.Process, err error) {
+func StartProc(rootPath string, cmd string, env string) (process *os.Process, err error) {
 	if process, err = GetProc(cmd); err != nil || process != nil {
 		return
 	}
@@ -31,7 +31,7 @@ func StartProc(cmd string, env string) (process *os.Process, err error) {
 	if env == "" {
 		env = "true"
 	}
-	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", dirname, env, cmd)
+	cmdStr := fmt.Sprintf("cd %s; %s; nohup %s >> gmonitor.log 2>&1 &", rootPath, env, cmd)
 
 	clog.Info("exec.Command() start............ cmd: %s", cmdStr)
 
@@ -61,7 +61,6 @@ func GetProc(cmd string) (process *os.Process, err error) {
 		return
 	}
 
-	cmdStr := strings.Join(strings.Fields(cmd), " ")
 	outputStr := string(output)
 	lines := strings.Split(outputStr, "\n")
 	pid := ""
@@ -72,7 +71,7 @@ func GetProc(cmd string) (process *os.Process, err error) {
 		}
 		_pid, _ppid, _cmd := fields[0], fields[1], strings.Join(fields[2:], " ")
 
-		if !strings.Contains(_cmd, cmdStr) {
+		if !strings.Contains(_cmd, cmd) {
 			continue
 		}
 		if pid == "" {

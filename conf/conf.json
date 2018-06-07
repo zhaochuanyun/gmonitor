@@ -4,8 +4,8 @@
         "rootpath": "/Users/mvpzhao/go/src/github.com/zhaochuanyun/",
         "environ": "ulimit -n 256",
         "svrs": {
-            "test": "services/bash.sh -test",
-            "sit": "services/bash.sh -sit"
+            "test": "./services/bash.sh -test",
+            "sit": "./services/bash.sh -sit"
         },
         "clog": {
             "name": "gmonitor",
@@ -25,7 +25,7 @@
         "clog": {
             "name": "gmonitor",
             "addr": "clog.srv.ns",
-            "mode": 2, // 0: none, 1: localfile, 2: clog (数字代表bit位)
+            "mode": 1, // 0: none, 1: localfile, 2: clog (数字代表bit位)
             "level": 14 // 0: none, 1: debug, 2: warn 4: error 8: info (数字代表bit位)
         }
     }

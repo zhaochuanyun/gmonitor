@@ -26,9 +26,9 @@ func proc(service string, cmd string) {
 		}
 	}()
 
-	fullpath := filepath.Join(conf.C.RootPath, cmd)
+	//fullpath := filepath.Join(conf.C.RootPath, cmd)
 
-	process, err := procs.GetProc(fullpath)
+	process, err := procs.GetProc(conf.C.RootPath)
 	if err != nil {
 		clog.Error("proc() GetProc %s error: %v", service, err)
 		return
@@ -65,7 +65,7 @@ func proc(service string, cmd string) {
 						failNum = 0
 						time.Sleep(time.Second * 3)
 					}
-					if process_i, err := procs.StartProc(fullpath, conf.C.Environ); err != nil || process_i == nil {
+					if process_i, err := procs.StartProc(conf.C.RootPath, cmd, conf.C.Environ); err != nil || process_i == nil {
 						clog.Error("proc() StartProc %s error: %v", service, err)
 					} else {
 						process = process_i
@@ -105,11 +105,12 @@ func proc(service string, cmd string) {
 			}
 		case <-tick2:
 			if status == 2 {
-				if process, err := procs.GetProc(fullpath); err != nil || process == nil {
+				if process, err := procs.GetProc(cmd); err != nil || process == nil {
 					clog.Error("proc() GetProc %s error: %v", service, err)
 				}
 			}
 		case <-tick3:
+			fullpath := filepath.Join(conf.C.RootPath, cmd)
 			dirname := ""
 			pos := strings.Index(fullpath, " ")
 			if pos != -1 {
