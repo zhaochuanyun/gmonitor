@@ -58,8 +58,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		case comm.STATUS:
 			statusoks, statusfails := []string{}, []string{}
 			for _, service := range services {
-				fullpath := filepath.Join(conf.C.RootPath, conf.C.Svrs[service])
-				process, err := procs.GetProc(fullpath)
+				//fullpath := filepath.Join(conf.C.RootPath, conf.C.Svrs[service])
+				process, err := procs.GetProc(conf.C.Svrs[service])
 				if err != nil {
 					w.Write([]byte(fmt.Sprintf("\nget service %s error: %v\n", service, err)))
 				}

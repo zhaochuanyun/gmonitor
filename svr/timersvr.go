@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"runtime/debug"
-	"strings"
 	"time"
 
 	"github.com/simplejia/clog"
@@ -28,13 +26,13 @@ func proc(service string, cmd string) {
 
 	//fullpath := filepath.Join(conf.C.RootPath, cmd)
 
-	process, err := procs.GetProc(conf.C.RootPath)
+	process, err := procs.GetProc(cmd)
 	if err != nil {
 		clog.Error("proc() GetProc %s error: %v", service, err)
 		return
 	}
 
-	tick1 := time.Tick(time.Second * 10)
+	tick1 := time.Tick(time.Second * 60)
 	tick2 := time.Tick(time.Minute)
 	tick3 := time.Tick(time.Hour * 24)
 	failNum := 0
@@ -110,18 +108,15 @@ func proc(service string, cmd string) {
 				}
 			}
 		case <-tick3:
-			fullpath := filepath.Join(conf.C.RootPath, cmd)
-			dirname := ""
-			pos := strings.Index(fullpath, " ")
-			if pos != -1 {
-				dirname = filepath.Dir(fullpath[:pos])
-			} else {
-				dirname = filepath.Dir(fullpath)
-			}
-			cmdStr := fmt.Sprintf(
-				"cd %s; head -c`wc -c gmonitor.log|awk '{print $1}'` gmonitor.log >gmonitor.%d.log && cat /dev/null >gmonitor.log",
-				dirname, time.Now().Day(),
-			)
+			//fullpath := filepath.Join(conf.C.RootPath, cmd)
+			//dirname := ""
+			//pos := strings.Index(fullpath, " ")
+			//if pos != -1 {
+			//	dirname = filepath.Dir(fullpath[:pos])
+			//} else {
+			//	dirname = filepath.Dir(fullpath)
+			//}
+			cmdStr := fmt.Sprintf("cd %s; head -c`wc -c gmonitor.log|awk '{print $1}'` gmonitor.log > gmonitor.%d.log && cat /dev/null > gmonitor.log", conf.C.RootPath, time.Now().Day())
 			err := exec.Command("sh", "-c", cmdStr).Run()
 			if err != nil {
 				clog.Error("proc() exec.Command error: %v", err)
