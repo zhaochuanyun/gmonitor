@@ -10,11 +10,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zhaochuanyun/clog"
+	"github.com/simplejia/clog"
+	"github.com/simplejia/utils"
+
 	"github.com/zhaochuanyun/gmonitor/comm"
 	"github.com/zhaochuanyun/gmonitor/conf"
 	"github.com/zhaochuanyun/gmonitor/procs"
-	"github.com/zhaochuanyun/utils"
 )
 
 func StartHttpSvr() {

@@ -1,9 +1,10 @@
 package clog
 
 import (
-	"github.com/zhaochuanyun/clog"
+	"github.com/simplejia/clog"
+	"github.com/simplejia/namecli/api"
+
 	"github.com/zhaochuanyun/gmonitor/conf"
-	"github.com/zhaochuanyun/namecli/api"
 )
 
 func init() {

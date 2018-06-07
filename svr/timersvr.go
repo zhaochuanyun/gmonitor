@@ -9,7 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zhaochuanyun/clog"
+	"github.com/simplejia/clog"
+
 	"github.com/zhaochuanyun/gmonitor/comm"
 	"github.com/zhaochuanyun/gmonitor/conf"
 	"github.com/zhaochuanyun/gmonitor/procs"

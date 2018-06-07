@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zhaochuanyun/clog"
+	"github.com/simplejia/clog"
+	"github.com/simplejia/utils"
+
 	_ "github.com/zhaochuanyun/gmonitor/clog"
 	"github.com/zhaochuanyun/gmonitor/comm"
 	"github.com/zhaochuanyun/gmonitor/conf"
 	"github.com/zhaochuanyun/gmonitor/svr"
-	"github.com/zhaochuanyun/utils"
+
 )
 
 func request(command string, service string) {

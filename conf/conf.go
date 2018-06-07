@@ -11,10 +11,11 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"os/exec"
+
+	"github.com/simplejia/utils"
 
 	"github.com/zhaochuanyun/gmonitor/comm"
-	"github.com/zhaochuanyun/utils"
-	"os/exec"
 )
 
 type Conf struct {

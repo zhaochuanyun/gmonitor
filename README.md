@@ -1,4 +1,4 @@
-# [gmonitor](http://github.com/zhaochuanyun/gmonitor)
+# gmonitor(参考自[cmonitor](https://github.com/simplejia/cmonitor))
 ## 功能
 * 用于进程监控，管理
 
